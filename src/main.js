@@ -855,6 +855,7 @@ document.addEventListener("DOMContentLoaded", () => {
           messageOutput.style.color = "black";
           messageOutput.classList.remove("animate__fadeOutUp");
         })
+        wipeLetters();
       }
     }
   
@@ -870,12 +871,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   
+    function wipeLetters() {
+      const currentWordArr = getCurrentWordArr();
+      
+      const removedLetter = currentWordArr.pop();
+
+      guessedWords[guessedWords.length - 1] = currentWordArr;
+  
+      const lastLetterEl = document.getElementById(String(availableSpace - 1));
+    
+      lastLetterEl.textContent = "";
+      availableSpace = availableSpace - 1;
+      
+    }
+
     function handleDeleteLetter() {
       // janky solution to being able to delete all the letters and break the game
       // will it stand the test of time? hopefully.
       if (availableSpace % 5 == 1){
         return;
       }
+
       const currentWordArr = getCurrentWordArr();
       const removedLetter = currentWordArr.pop();
   
