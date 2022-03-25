@@ -102,6 +102,19 @@
     justify-content: center;
     align-items: center;
   }
+
+  #message-output {
+    display: flex;
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.4rem 0 0.4rem 0;
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    justify-content: center;
+    align-items:center;
+  }
   
   #keyboard-container {
     height: 200px;

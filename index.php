@@ -30,6 +30,10 @@
         <div id="board-container">
           <div id="board"></div>
         </div>
+
+        <div id="messages-div">
+          <h1 id="message-output">dont look here</h1>
+        </div>
         
         <div id="keyboard-container">
           <div class="keyboard-row">

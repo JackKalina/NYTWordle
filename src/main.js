@@ -736,9 +736,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
     function handleLoadingWords(){
       const currentWordArr = getCurrentWordArr();
-      if (currentWordArr.length !== 5) {
-        window.alert("Word must be 5 letters");
-      }
 
       const currentWord = currentWordArr.join("");
       if (allWords.includes(currentWord) || possibleAnswerWords.includes(currentWord)){
@@ -760,11 +757,6 @@ document.addEventListener("DOMContentLoaded", () => {
           if (currentWord === word) {
             playerWon = true;
           }
-          /*
-          if (guessedWords.length === 6) {
-            window.alert(`Sorry, you have no more guesses! The word is ${word}.`);
-          }
-          */
           guessedWords.push([]);
       } else {
         window.alert("Word is not recognised!");
@@ -773,12 +765,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleSubmitWord() {
       const currentWordArr = getCurrentWordArr();
-      if (currentWordArr.length !== 5) {
-        window.alert("Word must be 5 letters");
-      }
-
+      
       const currentWord = currentWordArr.join("");
-      if (allWords.includes(currentWord) || possibleAnswerWords.includes(currentWord)){
+      if (currentWordArr.length !== 5) {
+        const firstLetterId = guessedWordCount * 5 + 1;
+        const interval = 200;
+        currentWordArr.forEach((letter, index) => {
+          setTimeout(() => {
+            const letterId = firstLetterId + index;
+            const letterEl = document.getElementById(letterId);
+            letterEl.classList.add("animate__shakeX");
+          }, interval);
+        });
+        currentWordArr.forEach((letter, index) => {
+          const letterId = firstLetterId + index;
+          const letterEl = document.getElementById(letterId);
+          letterEl.classList.remove("animate__shakeX");
+        });
+        let messageOutput = document.querySelector("#message-output");
+        messageOutput.style.color = "gainsboro";
+        messageOutput.innerHTML = `Word must be 5 letters.`;
+        setTimeout(() => {
+          messageOutput.classList.add("animate__animated", "animate__fadeOutUp");
+          }, 1000)
+            
+          messageOutput.addEventListener('animationend', () => {
+            messageOutput.style.color = "black";
+            messageOutput.classList.remove("animate__fadeOutUp");
+       })
+      } else if (allWords.includes(currentWord) || possibleAnswerWords.includes(currentWord)){
           const firstLetterId = guessedWordCount * 5 + 1;
           const interval = 200;
           currentWordArr.forEach((letter, index) => {
@@ -796,11 +811,15 @@ document.addEventListener("DOMContentLoaded", () => {
   
           if (currentWord === word) {
             playerWon = true;
-            //window.alert("Congratulations!");
+            let messageOutput = document.querySelector("#message-output");
+            messageOutput.style.color = "gainsboro";
+            messageOutput.innerHTML = `Congratulations!`;
           }
   
           if (guessedWords.length === 6) {
-            window.alert(`Sorry, you have no more guesses! The word is ${word}.`);
+            let messageOutput = document.querySelector("#message-output");
+            messageOutput.style.color = "gainsboro";
+            messageOutput.innerHTML = `You are out of guesses!<br>The word was ${word}`;
           }
   
           guessedWords.push([]);
@@ -813,18 +832,29 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval = 200;
-          currentWordArr.forEach((letter, index) => {
-            setTimeout(() => {
-              const letterId = firstLetterId + index;
-              const letterEl = document.getElementById(letterId);
-              letterEl.classList.add("animate__shakeX");
-            }, interval * index);
-          });
-          currentWordArr.forEach((letter, index) => {
+        currentWordArr.forEach((letter, index) => {
+          setTimeout(() => {
             const letterId = firstLetterId + index;
             const letterEl = document.getElementById(letterId);
-            letterEl.classList.remove("animate__shakeX");
-          });
+            letterEl.classList.add("animate__shakeX");
+          }, interval);
+        });
+        currentWordArr.forEach((letter, index) => {
+          const letterId = firstLetterId + index;
+          const letterEl = document.getElementById(letterId);
+          letterEl.classList.remove("animate__shakeX");
+        });
+        let messageOutput = document.querySelector("#message-output");
+        messageOutput.style.color = "gainsboro";
+        messageOutput.innerHTML = `Invalid word!`;
+        setTimeout(() => {
+          messageOutput.classList.add("animate__animated", "animate__fadeOutUp");
+        }, 1000)
+            
+        messageOutput.addEventListener('animationend', () => {
+          messageOutput.style.color = "black";
+          messageOutput.classList.remove("animate__fadeOutUp");
+        })
       }
     }
   
