@@ -3,9 +3,7 @@ to do:
     localStorage for current run (so you cant just refresh and cuck it all)
     build leaderboard that shows your stats after game ends
     implement RIT login to associate statistics/scores with a person
-        - dear god I hope someone knows PHP
-        - https://www.rit.edu/webdev/people/htaccess
-            -  this explains how to get that information... how do I use php? how do i get those variables into a js file?
+        - currently it can get UID. this is done? maybe?
     build firebase db to store statistics
         - each individual person has their own collection
         - each one has a spot for current day, and for overall scores

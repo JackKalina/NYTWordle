@@ -633,6 +633,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     createSquares();
   
+    let uidDiv = document.querySelector("#uid-div");
+    let uid = uidDiv.dataset.uid;
+    console.log(`UID is ${uid}`);
+
     let guessedWords = [[]];
     let availableSpace = 1;
     

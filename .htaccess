@@ -6,3 +6,4 @@ ShibRequireSession on
 require shib-attr ritEduAffiliation Student
 require shib-attr ritEduAffiliation Employee
 require shib-attr ritEduAffiliation Alumni
+DirectoryIndex index.php index.html

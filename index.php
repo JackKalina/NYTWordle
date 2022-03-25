@@ -19,7 +19,7 @@
           <h1 class="title">NYT WORDLE</h1>
         </header>
 
-        <div id="uid-div" data-uid="jjk1280"></div>
+        <div id="uid-div" data-uid="<?php echo $_SERVER['uid']?>"></div>
 
         <div id="board-container">
           <div id="board"></div>
