@@ -635,7 +635,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
     let uidDiv = document.querySelector("#uid-div");
     let uid = uidDiv.dataset.uid;
-    console.log(`UID is ${uid}`);
+    let nameDiv = document.querySelector("#name-div");
+    let firstName = nameDiv.dataset.given;
+    let lastName = nameDiv.dataset.last;
+    let usersName = `${firstName} ${lastName}`;
+    document.querySelector("#users-name").innerHTML = `${usersName}`;
 
     let guessedWords = [[]];
     let availableSpace = 1;
@@ -649,6 +653,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let word = possibleAnswerWords[wordNumber];
 
+    let playerWon = false;
+
+    // Lots of checking for whether or not there is local storage and if someone's already played
+    // Could this be done better? Probably. But for now it is functional.
     if (localStorage.getItem('jjk1280-wordle-lastWordPlayed') === null){
       localStorage.setItem('jjk1280-wordle-lastWordPlayed',wordNumber);
       localStorage.setItem('jjk1280-wordle-guessedWords','');
@@ -659,19 +667,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (localStorage.getItem('jjk1280-wordle-guessedWords') === null){
         localStorage.setItem('jjk1280-wordle-guessedWords','');
       } else if (localStorage.getItem('jjk1280-wordle-guessedWords') !== ''){
+        // whatever you do... don't change this. please
         let loadedWords = localStorage.getItem('jjk1280-wordle-guessedWords');
         loadedWords = JSON.parse(loadedWords);
-        //console.log("loadedWords");
-        //console.log(loadedWords);
         for (let word of loadedWords){
           if (word.length == 0){
             continue;
           }
-          //console.log("word");
-          //console.log(word);
           for (let letter of word){
-            //console.log("letter");
-            //console.log(letter);
             updateGuessedWords(letter);
           }
           handleLoadingWords();
@@ -680,7 +683,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     
-
+    // helper functions for word number
+    // thanks stackoverflow 
     function treatAsUTC(date) {
         let result = new Date(date);
         result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
@@ -752,11 +756,11 @@ document.addEventListener("DOMContentLoaded", () => {
           });
   
           guessedWordCount += 1;
-          /*
+          
           if (currentWord === word) {
-            window.alert("Congratulations!");
+            playerWon = true;
           }
-  
+          /*
           if (guessedWords.length === 6) {
             window.alert(`Sorry, you have no more guesses! The word is ${word}.`);
           }
@@ -775,7 +779,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const currentWord = currentWordArr.join("");
       if (allWords.includes(currentWord) || possibleAnswerWords.includes(currentWord)){
-        const firstLetterId = guessedWordCount * 5 + 1;
+          const firstLetterId = guessedWordCount * 5 + 1;
           const interval = 200;
           currentWordArr.forEach((letter, index) => {
             setTimeout(() => {
@@ -791,7 +795,8 @@ document.addEventListener("DOMContentLoaded", () => {
           guessedWordCount += 1;
   
           if (currentWord === word) {
-            window.alert("Congratulations!");
+            playerWon = true;
+            //window.alert("Congratulations!");
           }
   
           if (guessedWords.length === 6) {
@@ -806,7 +811,20 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem('jjk1280-wordle-guessedWords',JSON.stringify(guessedWords));
           }
       } else {
-        window.alert("Word is not recognised!");
+        const firstLetterId = guessedWordCount * 5 + 1;
+        const interval = 200;
+          currentWordArr.forEach((letter, index) => {
+            setTimeout(() => {
+              const letterId = firstLetterId + index;
+              const letterEl = document.getElementById(letterId);
+              letterEl.classList.add("animate__shakeX");
+            }, interval * index);
+          });
+          currentWordArr.forEach((letter, index) => {
+            const letterId = firstLetterId + index;
+            const letterEl = document.getElementById(letterId);
+            letterEl.classList.remove("animate__shakeX");
+          });
       }
     }
   
@@ -847,8 +865,11 @@ document.addEventListener("DOMContentLoaded", () => {
           handleDeleteLetter();
           return;
         }
-  
-        updateGuessedWords(letter);
+        
+        if (!playerWon){
+          updateGuessedWords(letter);
+        }
+
       };
     }
   });

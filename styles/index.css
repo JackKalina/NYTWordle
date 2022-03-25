@@ -1,4 +1,4 @@
-* {
+  * {
     margin: 0;
     padding: 0;
   }
@@ -29,7 +29,7 @@
   header {
     border-bottom: 1px solid rgb(58, 58, 60);
   }
-  
+
   .title {
     color: gainsboro;
     font-size: 2.5rem;
@@ -38,6 +38,39 @@
     text-align: center;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+
+  #name-bar {
+    display: flex;
+  }
+
+  #users-name {
+    color: gainsboro;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0.4rem 0 0.4rem 6px;
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    flex-grow: 2;
+  }
+
+  #leaderboard-button {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border: 0;
+    padding: 2px;
+    height: auto;
+    cursor: pointer;
+    background-color: rgb(129, 131, 132);
+    color: rgb(215, 218, 220);
+    flex-grow: 1;
+    text-transform: uppercase;
+    margin-right: 6px;
+    margin-left: 30px;
+    border-radius: 4px;
+    user-select: none;
   }
   
   #board-container {
