@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (currentWordArr.length !== 5) {
         window.alert("Word must be 5 letters");
       }
-  
+      
       const currentWord = currentWordArr.join("");
       if (allWords.includes(currentWord) || possibleAnswerWords.includes(currentWord)){
         const firstLetterId = guessedWordCount * 5 + 1;
