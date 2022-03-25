@@ -640,12 +640,46 @@ document.addEventListener("DOMContentLoaded", () => {
     let guessedWords = [[]];
     let availableSpace = 1;
     
+    let guessedWordCount = 0;
+    
     const startDate = new Date("03/25/2022");
     const todaysDate = new Date();
 
     const wordNumber = Math.floor(daysBetween(startDate, todaysDate));
-
+    
     let word = possibleAnswerWords[wordNumber];
+
+    if (localStorage.getItem('jjk1280-wordle-lastWordPlayed') === null){
+      localStorage.setItem('jjk1280-wordle-lastWordPlayed',wordNumber);
+      localStorage.setItem('jjk1280-wordle-guessedWords','');
+    } else if (localStorage.getItem('jjk1280-wordle-lastWordPlayed') != wordNumber){
+      localStorage.setItem('jjk1280-wordle-lastWordPlayed',wordNumber);
+      localStorage.setItem('jjk1280-wordle-guessedWords','');
+    } else {
+      if (localStorage.getItem('jjk1280-wordle-guessedWords') === null){
+        localStorage.setItem('jjk1280-wordle-guessedWords','');
+      } else if (localStorage.getItem('jjk1280-wordle-guessedWords') !== ''){
+        let loadedWords = localStorage.getItem('jjk1280-wordle-guessedWords');
+        loadedWords = JSON.parse(loadedWords);
+        //console.log("loadedWords");
+        //console.log(loadedWords);
+        for (let word of loadedWords){
+          if (word.length == 0){
+            continue;
+          }
+          //console.log("word");
+          //console.log(word);
+          for (let letter of word){
+            //console.log("letter");
+            //console.log(letter);
+            updateGuessedWords(letter);
+          }
+          handleLoadingWords();
+        }
+      }
+    }
+    
+    
 
     function treatAsUTC(date) {
         let result = new Date(date);
@@ -658,7 +692,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
     }
 
-    let guessedWordCount = 0;
   
     const keys = document.querySelectorAll(".keyboard-row button");
   
@@ -666,7 +699,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const numberOfGuessedWords = guessedWords.length;
       return guessedWords[numberOfGuessedWords - 1];
     }
-  
+
     function updateGuessedWords(letter) {
       const currentWordArr = getCurrentWordArr();
   
@@ -697,6 +730,43 @@ document.addEventListener("DOMContentLoaded", () => {
       return "rgb(181, 159, 59)";
     }
   
+    function handleLoadingWords(){
+      const currentWordArr = getCurrentWordArr();
+      if (currentWordArr.length !== 5) {
+        window.alert("Word must be 5 letters");
+      }
+
+      const currentWord = currentWordArr.join("");
+      if (allWords.includes(currentWord) || possibleAnswerWords.includes(currentWord)){
+        const firstLetterId = guessedWordCount * 5 + 1;
+          const interval = 200;
+          currentWordArr.forEach((letter, index) => {
+            setTimeout(() => {
+              const tileColor = getTileColor(letter, index);
+  
+              const letterId = firstLetterId + index;
+              const letterEl = document.getElementById(letterId);
+              letterEl.classList.add("animate__flipInX");
+              letterEl.style = `background-color:${tileColor};border-color:${tileColor}`;
+            }, interval * index);
+          });
+  
+          guessedWordCount += 1;
+          /*
+          if (currentWord === word) {
+            window.alert("Congratulations!");
+          }
+  
+          if (guessedWords.length === 6) {
+            window.alert(`Sorry, you have no more guesses! The word is ${word}.`);
+          }
+          */
+          guessedWords.push([]);
+      } else {
+        window.alert("Word is not recognised!");
+      }
+    }
+
     function handleSubmitWord() {
       const currentWordArr = getCurrentWordArr();
       if (currentWordArr.length !== 5) {
@@ -729,6 +799,12 @@ document.addEventListener("DOMContentLoaded", () => {
           }
   
           guessedWords.push([]);
+          //console.log(guessedWords);
+          if (localStorage.getItem('jjk1280-wordle-guessedWords') === '' ){
+          localStorage.setItem('jjk1280-wordle-guessedWords',JSON.stringify(guessedWords));
+          } else if (JSON.parse(localStorage.getItem('jjk1280-wordle-guessedWords')) != guessedWords){
+          localStorage.setItem('jjk1280-wordle-guessedWords',JSON.stringify(guessedWords));
+          }
       } else {
         window.alert("Word is not recognised!");
       }
