@@ -871,6 +871,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     function handleDeleteLetter() {
+      // janky solution to being able to delete all the letters and break the game
+      // will it stand the test of time? hopefully.
+      if (availableSpace % 5 == 1){
+        return;
+      }
       const currentWordArr = getCurrentWordArr();
       const removedLetter = currentWordArr.pop();
   

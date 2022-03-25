@@ -15,6 +15,7 @@ to do:
         - how everyone did today
         - your personal stats
         - everyone's comparative stats (points system- 6 points for first word, 1 point for last, etc.?)
+    x you can currently just delete letters that have been typed
 
 less important but would be nice:
     x convert window.alerts to something nice like on actual wordle (animation for word not real, etc.)
