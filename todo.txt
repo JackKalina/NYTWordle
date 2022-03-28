@@ -21,5 +21,5 @@ less important but would be nice:
     v convert window.alerts to something nice like on actual wordle (animation for word not real, etc.)
         - word not real - done
         - word correct - done
-    x allow people to use keyboard (only matters if you're playing on pc like a weirdo)
+    v allow people to use keyboard (only matters if you're playing on pc like a weirdo)
     v change keyboard colors

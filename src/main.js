@@ -932,4 +932,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       };
     }
+
+    // Detecting the a real keyboard being used on PC
+    document.addEventListener('keydown', function (e) {
+      let key = e.key;
+      let alphabet = "abcdefghijklmnopqrstuvwxyz";
+      if (key == "Enter"){
+        handleSubmitWord();
+      } else if (key == "Backspace" || key == "Delete"){
+        handleDeleteLetter();
+      } else if (alphabet.includes(key)){
+        updateGuessedWords(key);
+      }
+    });
   });
