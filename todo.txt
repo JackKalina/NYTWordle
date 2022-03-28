@@ -18,8 +18,8 @@ to do:
     x when you get a word wrong you cant delete it
 
 less important but would be nice:
-    x convert window.alerts to something nice like on actual wordle (animation for word not real, etc.)
+    v convert window.alerts to something nice like on actual wordle (animation for word not real, etc.)
         - word not real - done
-        - word correct - not done
+        - word correct - done
     x allow people to use keyboard (only matters if you're playing on pc like a weirdo)
     v change keyboard colors

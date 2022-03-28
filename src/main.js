@@ -639,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let firstName = nameDiv.dataset.given;
     let lastName = nameDiv.dataset.last;
     let usersName = `${firstName} ${lastName}`;
-    document.querySelector("#users-name").innerHTML = `${usersName}`;
+    //document.querySelector("#users-name").innerHTML = `${usersName}`;
 
     let guessedWords = [[]];
     let availableSpace = 1;

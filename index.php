@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NYT WORDLE</title>
     <script src="./src/main.js"></script>
+    <script src="https://kit.fontawesome.com/5561847ede.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles/index.css" />
     <link
       rel="stylesheet"
@@ -22,7 +23,6 @@
         <div id="uid-div" data-uid="<?php echo $_SERVER['uid']?>"></div>
         <div id="name-div" data-given="<?php echo $_SERVER['givenName']?>" data-last="<?php echo $_SERVER['sn']?>">
           <div id="name-bar">
-           <h1 id="users-name"></h1>
            <button id="leaderboard-button">Leaderboard</button>
           </div>
         </div>
