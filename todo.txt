@@ -22,3 +22,4 @@ less important but would be nice:
         - word not real - done
         - word correct - not done
     x allow people to use keyboard (only matters if you're playing on pc like a weirdo)
+    v change keyboard colors

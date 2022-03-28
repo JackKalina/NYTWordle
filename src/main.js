@@ -719,8 +719,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
     function getTileColor(letter, index) {
       const isCorrectLetter = word.includes(letter);
-  
+      let dataKeyString = `button[data-key="${letter}"]`;
+      let thisLettersButton = document.querySelector(dataKeyString);
+
       if (!isCorrectLetter) {
+        thisLettersButton.style.backgroundColor = "rgb(58, 58, 60)";
         return "rgb(58, 58, 60)";
       }
   
@@ -728,9 +731,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const isCorrectPosition = letter === letterInThatPosition;
   
       if (isCorrectPosition) {
+        thisLettersButton.style.backgroundColor = "rgb(83, 141, 78)";
         return "rgb(83, 141, 78)";
       }
-  
+      
+      if (thisLettersButton.style.backgroundColor != "rgb(83, 141, 78)"){
+        thisLettersButton.style.backgroundColor = "rgb(181, 159, 59)";
+      }
       return "rgb(181, 159, 59)";
     }
   
@@ -799,12 +806,13 @@ document.addEventListener("DOMContentLoaded", () => {
           currentWordArr.forEach((letter, index) => {
             setTimeout(() => {
               const tileColor = getTileColor(letter, index);
-  
+              
               const letterId = firstLetterId + index;
               const letterEl = document.getElementById(letterId);
               letterEl.classList.add("animate__flipInX");
               letterEl.style = `background-color:${tileColor};border-color:${tileColor}`;
             }, interval * index);
+            
           });
   
           guessedWordCount += 1;
@@ -816,7 +824,7 @@ document.addEventListener("DOMContentLoaded", () => {
             messageOutput.innerHTML = `Congratulations!`;
           }
   
-          if (guessedWords.length === 6) {
+          if (guessedWords.length === 6 && currentWord !== word) {
             let messageOutput = document.querySelector("#message-output");
             messageOutput.style.color = "gainsboro";
             messageOutput.innerHTML = `You are out of guesses!<br>The word was ${word}`;
@@ -855,7 +863,6 @@ document.addEventListener("DOMContentLoaded", () => {
           messageOutput.style.color = "black";
           messageOutput.classList.remove("animate__fadeOutUp");
         })
-        wipeLetters();
       }
     }
   
@@ -889,7 +896,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // janky solution to being able to delete all the letters and break the game
       // will it stand the test of time? hopefully.
       if (availableSpace % 5 == 1){
-        return;
+        if (getCurrentWordArr().length != 5){
+          return;
+        }
       }
 
       const currentWordArr = getCurrentWordArr();
