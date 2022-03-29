@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NYT WORDLE</title>
-    <script src="./src/main.js"></script>
-    <script src="https://kit.fontawesome.com/5561847ede.js" crossorigin="anonymous"></script>
+    <script type="module" src="./src/main.js"></script>
     <link rel="stylesheet" href="./styles/index.css" />
     <link
       rel="stylesheet"
@@ -75,5 +74,6 @@
         </div>
       </div>
     </div>
+
   </body>
 </html>

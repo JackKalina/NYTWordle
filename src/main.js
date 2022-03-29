@@ -1,3 +1,15 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+import { getDatabase, ref, set, get, child, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { firebaseConfig } from "./firebaseConfig.js";
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// Get a reference to the database service
+const database = getDatabase(app);
+
 document.addEventListener("DOMContentLoaded", () => {
     
     const possibleAnswerWords = ["cigar","rebut","sissy","humph","awake","blush","focal","evade","naval","serve","heath","dwarf","model","karma","stink",
@@ -629,7 +641,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "zazen","zeals","zebec","zebub","zebus","zedas","zeins","zendo","zerda","zerks","zeros","zests","zetas","zexes","zezes","zhomo","zibet","ziffs","zigan","zilas","zilch","zilla",
     "zills","zimbi","zimbs","zinco","zincs","zincy","zineb","zines","zings","zingy","zinke","zinky","zippo","zippy","ziram","zitis","zizel","zizit","zlote","zloty","zoaea","zobos",
     "zobus","zocco","zoeae","zoeal","zoeas","zoism","zoist","zombi","zonae","zonda","zoned","zoner","zones","zonks","zooea","zooey","zooid","zooks","zooms","zoons","zooty","zoppa",
-    "zoppo","zoril","zoris","zorro","zouks","zowee","zowie","zulus","zupan","zupas","zuppa","zurfs","zuzim","zygal","zygon","zymes","zymic"];
+                  "zoppo","zoril","zoris","zorro","zouks","zowee","zowie","zulus","zupan","zupas","zuppa","zurfs","zuzim","zygal","zygon","zymes","zymic"];
     
     createSquares();
   
@@ -654,6 +666,30 @@ document.addEventListener("DOMContentLoaded", () => {
     let word = possibleAnswerWords[wordNumber];
 
     let playerWon = false;
+
+    const dbRef = ref(database);
+    get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+      if (snapshot.val() == null){
+        set(ref(database, `users/${uid}`), {
+          last_day_played: wordNumber,
+          name: usersName,
+          score_today: 0,
+          scores: {
+            test: 0
+          }
+        });
+      } else {
+        // check if last-word-played != wordNumber
+        // if so, set last-word-played to today's and score-today to 0
+        if (snapshot.val().last_day_played != wordNumber){
+          const updateData = {};
+          updateData[`users/${uid}/last_day_played`] = wordNumber;
+          update(ref(database), updateData);
+        }
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
 
     // Lots of checking for whether or not there is local storage and if someone's already played
     // Could this be done better? Probably. But for now it is functional.

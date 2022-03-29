@@ -1,0 +1,21 @@
+STRUCTURE
+
+nytwordle-default-rtdb
+    - users
+        - jjk1280
+            - last-day-played: 1
+            - name: "Jack Kalina"
+            - score-today: 0
+            - scores
+                - 0: 3
+                - 1: 4
+                - etc.
+        - ttu1234
+            - last-day-played: 2
+            - name: "Test User"
+            - score-today: 3
+            - scores
+                - 0: 2
+                - 2: 3
+    - todays-scores
+        - jjk1280: 3
