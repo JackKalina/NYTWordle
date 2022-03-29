@@ -15,15 +15,21 @@
   <body>
     <div id="container">
       <div id="game">
-        <header>
-          <h1 class="title">NYT WORDLE</h1>
-        </header>
+        <div id = "top">
+          <header>
+            <h1 class="title">NYT WORDLE</h1>
+          </header>
 
-        <div id="uid-div" data-uid="<?php echo $_SERVER['uid']?>"></div>
-        <div id="name-div" data-given="<?php echo $_SERVER['givenName']?>" data-last="<?php echo $_SERVER['sn']?>">
-          <div id="name-bar">
-           <button id="leaderboard-button">Leaderboard</button>
+          <div id="uid-div" data-uid="<?php echo $_SERVER['uid']?>"></div>
+          <div id="name-div" data-given="<?php echo $_SERVER['givenName']?>" data-last="<?php echo $_SERVER['sn']?>">
+            <div id="name-bar">
+              <button id="leaderboard-button">Leaderboard</button>
+            </div>
           </div>
+        </div>
+
+        <div>
+          <h1 id="blank-space">dont look here</h1>
         </div>
 
         <div id="board-container">
