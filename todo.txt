@@ -15,7 +15,7 @@ to do:
         - how everyone did today
         - your personal stats
         - everyone's comparative stats (points system- 6 points for first word, 1 point for last, etc.?)
-    x when you get a word wrong you cant delete it
+    v when you get a word wrong you cant delete it
 
 less important but would be nice:
     v convert window.alerts to something nice like on actual wordle (animation for word not real, etc.)
@@ -23,4 +23,4 @@ less important but would be nice:
         - word correct - done
     v allow people to use keyboard (only matters if you're playing on pc like a weirdo)
     v change keyboard colors
-    x fix css so it works on all platforms
+    v fix css so it works on all platforms
