@@ -6,11 +6,11 @@ to do:
     x build leaderboard that shows your stats after game ends
     v implement RIT login to associate statistics/scores with a person
         - currently it can get UID. this is done? maybe?
-    x build firebase db to store statistics
+    v build firebase db to store statistics
         - each individual person has their own collection
         - each one has a spot for current day, and for overall scores
             - current day one is checked on first load, if the days don't match it wipes the currentDay (implement different maybe)
-        - store names with usernames (this will just be hard coded in the db with everyone's rit emails which im hoping we can pull from RIT login)
+        - store names with usernames 
     x build leaderboard.html page to show statistics for: 
         - how everyone did today
         - your personal stats
