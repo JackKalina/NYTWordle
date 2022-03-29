@@ -67,7 +67,7 @@
     border-radius: 4px;
     user-select: none;
     height: 7vmin;
-
+    width: 500px;
   }
   
   #board-container {

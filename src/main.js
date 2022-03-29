@@ -875,7 +875,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const updateData = {};
             updateData[`users/${uid}/score_today`] = guessedWordCount;
             updateData[`users/${uid}/scores/${wordNumber}`] = guessedWordCount;
-            updateData[`todays-scores/${uid}`] = guessedWordCount;
+            updateData[`todays-scores/${uid}`] = {
+              name: usersName,
+              score: guessedWordCount
+            };
             update(ref(database), updateData);
 
           }
@@ -888,7 +891,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const updateData = {};
             updateData[`users/${uid}/score_today`] = "X";
             updateData[`users/${uid}/scores/${wordNumber}`] = "X";
-            updateData[`todays-scores/${uid}`] = "X";
+            updateData[`todays-scores/${uid}`] = {
+              name: usersName,
+              score: "X"
+            };
             update(ref(database), updateData);
           }
   

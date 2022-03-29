@@ -22,9 +22,9 @@
 
           <div id="uid-div" data-uid="<?php echo $_SERVER['uid']?>"></div>
           <div id="name-div" data-given="<?php echo $_SERVER['givenName']?>" data-last="<?php echo $_SERVER['sn']?>">
-            <div id="name-bar">
-              <button id="leaderboard-button">Leaderboard</button>
-            </div>
+          <div id="name-bar">
+              <button id="leaderboard-button" onclick="location.href= './leaderboard.html';">Leaderboard</button>
+          </div>
           </div>
         </div>
 
