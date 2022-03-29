@@ -858,12 +858,23 @@ document.addEventListener("DOMContentLoaded", () => {
             let messageOutput = document.querySelector("#message-output");
             messageOutput.style.color = "gainsboro";
             messageOutput.innerHTML = `Congratulations!`;
+
+            const updateData = {};
+            updateData[`users/${uid}/score_today`] = guessedWordCount;
+            updateData[`users/${uid}/scores/${wordNumber}`] = guessedWordCount;
+            update(ref(database), updateData);
+
           }
   
           if (guessedWords.length === 6 && currentWord !== word) {
             let messageOutput = document.querySelector("#message-output");
             messageOutput.style.color = "gainsboro";
             messageOutput.innerHTML = `You are out of guesses!<br>The word was ${word}`;
+
+            const updateData = {};
+            updateData[`users/${uid}/score_today`] = "X";
+            updateData[`users/${uid}/scores/${wordNumber}`] = "X";
+            update(ref(database), updateData);
           }
   
           guessedWords.push([]);
