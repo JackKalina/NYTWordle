@@ -24,3 +24,21 @@ header {
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     max-height: 10vw;
 }
+
+#today-leaderboard {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.name {
+    color: gainsboro;
+    font-size: 4rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    text-align: center;
+}

@@ -684,18 +684,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (snapshot.val().last_day_played != wordNumber){
           const updateData = {};
           updateData[`users/${uid}/last_day_played`] = wordNumber;
-          updateData[`todays-scores/${uid}`] = 0;
+          updateData[`todaysScores/${uid}`] = 0;
           update(ref(database), updateData);
         }
       }
     }).catch((error) => {
       console.log(error);
     })
-    // check if todays-scores is for today. if it isn't, wipe it clean
-    get(child(dbRef,'todays-scores')).then((snapshot) => {
+    // check if todaysScores is for today. if it isn't, wipe it clean
+    get(child(dbRef,'todaysScores')).then((snapshot) => {
       if (snapshot.val().word_number != wordNumber){
         const updateData = {};
-        updateData['todays-scores'] = {
+        updateData['todaysScores'] = {
           word_number: wordNumber
         };
         update(ref(database), updateData);
@@ -875,7 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const updateData = {};
             updateData[`users/${uid}/score_today`] = guessedWordCount;
             updateData[`users/${uid}/scores/${wordNumber}`] = guessedWordCount;
-            updateData[`todays-scores/${uid}`] = {
+            updateData[`todaysScores/${uid}`] = {
               name: usersName,
               score: guessedWordCount
             };
@@ -891,7 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const updateData = {};
             updateData[`users/${uid}/score_today`] = "X";
             updateData[`users/${uid}/scores/${wordNumber}`] = "X";
-            updateData[`todays-scores/${uid}`] = {
+            updateData[`todaysScores/${uid}`] = {
               name: usersName,
               score: "X"
             };
